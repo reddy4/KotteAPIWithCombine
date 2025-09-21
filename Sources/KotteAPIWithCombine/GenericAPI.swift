@@ -13,7 +13,7 @@ public class GenericAPI {
     public init() { }
     
     public let shared = GenericAPI()
-    func getData<T: Decodable>(from url: String)->AnyPublisher<[T], Error> {
+    public func getData<T: Decodable>(from url: String)->AnyPublisher<[T], Error> {
         URLSession.shared.dataTaskPublisher(for: URL(string: url)!)
             .map(\.data)
             .decode(type: [T].self, decoder: JSONDecoder())

@@ -10,9 +10,11 @@ import Combine
 
 public class GenericAPI {
     
-    public init() { }
+    private init() { }
     
-    public let shared = GenericAPI()
+    @MainActor public static let shared = GenericAPI()
+    
+   // static let shared = GenericAPI()
     public func getData<T: Decodable>(from url: String)->AnyPublisher<[T], Error> {
         URLSession.shared.dataTaskPublisher(for: URL(string: url)!)
             .map(\.data)
